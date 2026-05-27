@@ -6,7 +6,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <span class="badge bg-success-subtle text-success mb-3 px-3 py-2 rounded-pill">100% Lokal</span>
-                    <h1 class="display-4 fw-bold text-success mb-3">Keripik Singkong <br><span style="color: #b5651d;">Renyah, Gurih, Alami</span></h1>
+                    <h1 class="display-4 fw-bold text-success mb-3">Keripik Singkongxxxxx <br><span style="color: #b5651d;">Renyah, Gurih, Alami</span></h1>
                     <p class="text-muted lead mb-4">UMKM singkong keripik yang menghadirkan camilan berkualitas dari singkong pilihan dengan rasa khas dan proses higienis.</p>
                     <a href="#" class="btn btn-success btn-lg rounded-pill px-4">Kenali Kami Lebih Dekat &rarr;</a>
                 </div>

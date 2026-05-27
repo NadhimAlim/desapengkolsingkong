@@ -18,7 +18,7 @@
                 <p>{{ $product->description }}</p>
                 <div class="detail-price">Rp{{ number_format($product->price, 0, ',', '.') }}</div>
                 <div class="detail-stock">Stok tersedia: {{ $product->stock }}</div>
-                <a href="https://wa.me/6281234567890?text={{ urlencode('Halo, saya tertarik dengan produk '.$product->name) }}" class="btn btn-dark">Pesan via WhatsApp</a>
+                <a href="https://wa.me/6281234567890?text={{ urlencode('Halo, saya tertarik dengan produk '.$product->name) }}" class="btn btn-dark">Tokepedia</a>
             </div>
         </div>
     </section>

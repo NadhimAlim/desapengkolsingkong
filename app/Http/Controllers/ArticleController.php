@@ -17,9 +17,23 @@ class ArticleController extends Controller
     }
 
     public function show(Article $article): View
-    {
-        abort_unless($article->is_published, 404);
+{
+    // 1. Amankan halaman: Pastikan artikel sudah dipublikasikan, jika belum tampilkan 404
+    abort_unless($article->is_published, 404);
 
-        return view('articles.show', compact('article'));
-    }
+    // 2. Cari artikel sebelumnya (yang ID-nya lebih kecil dan sudah dipublikasikan)
+    $previous = Article::where('id', '<', $article->id)
+                        ->where('is_published', true)
+                        ->orderBy('id', 'desc')
+                        ->first();
+
+    // 3. Cari artikel selanjutnya (yang ID-nya lebih besar dan sudah dipublikasikan)
+    $next = Article::where('id', '>', $article->id)
+                    ->where('is_published', true)
+                    ->orderBy('id', 'asc')
+                    ->first();
+
+    // 4. Kirim semua data ke view 'articles.show'
+    return view('articles.show', compact('article', 'previous', 'next'));
+}
 }
