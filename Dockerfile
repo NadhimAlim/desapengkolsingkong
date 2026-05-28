@@ -56,5 +56,10 @@ RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache \
 # 9. Expose port 3000 sesuai settingan di Coolify Anda
 EXPOSE 3000
 
-# 10. Jalankan PHP-FPM dan Nginx secara bersamaan saat container menyala
-CMD php-fpm -D && nginx -g "daemon off;"
+# 10. Sentuhan Akhir: Pastikan file sqlite dibuat, jalankan seeder/migrate, lalu start server
+CMD touch /var/www/html/database/database.sqlite \
+    && chown www-data:www-data /var/www/html/database/database.sqlite \
+    && php artisan migrate --force \
+    && php artisan db:seed --force \
+    && php-fpm -D \
+    && nginx -g "daemon off;"
