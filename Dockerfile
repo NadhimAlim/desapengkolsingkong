@@ -56,14 +56,14 @@ RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache \
 # 9. Expose port 80 (Samakan dengan PHP Native)
 EXPOSE 80
 
-# 10. Sentuhan Akhir: Buat folder & file database, berikan hak akses mutlak (777), baru jalankan Laravel
+# 10. Sentuhan Akhir: Buat folder database, jalankan migrasi, dan pastikan server Nginx TETAP MENYALA
 CMD mkdir -p /var/www/html/database /var/www/html/storage/framework/sessions /var/www/html/storage/framework/views /var/www/html/storage/framework/cache \
     && touch /var/www/html/database/database.sqlite \
     && chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database \
     && chown -R www-data:www-data /var/www/html \
     && php artisan config:clear \
     && php artisan cache:clear \
-    && php artisan migrate --force \
-    && php artisan db:seed --force \
-    && php-fpm -D \
+    ; php artisan migrate --force \
+    ; php artisan db:seed --force \
+    ; php-fpm -D \
     && nginx -g "daemon off;"
