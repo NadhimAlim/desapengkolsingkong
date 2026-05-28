@@ -56,9 +56,12 @@ RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache \
 # 9. Expose port 80 (Samakan dengan PHP Native)
 EXPOSE 80
 
-# 10. Sentuhan Akhir: Pastikan file sqlite dibuat, jalankan seeder/migrate, lalu start server
-CMD touch /var/www/html/database/database.sqlite \
-    && chown www-data:www-data /var/www/html/database/database.sqlite \
+# 10. Sentuhan Akhir: Buat file database, beri izin folder penuh, bersihkan cache, lalu start
+CMD mkdir -p /var/www/html/database /var/www/html/storage/framework/sessions /var/www/html/storage/framework/views /var/www/html/storage/framework/cache \
+    && touch /var/www/html/database/database.sqlite \
+    && chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database \
+    && chown -R www-data:www-data /var/www/html \
+    && php artisan config:clear \
     && php artisan migrate --force \
     && php artisan db:seed --force \
     && php-fpm -D \
