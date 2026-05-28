@@ -3,12 +3,36 @@
 @section('title', $product->name)
 
 @section('content')
+    <style>
+        /* Ketika dibuka di HP / Layar di bawah 768px */
+        @media (max-width: 768px) {
+            .detail-grid {
+                grid-template-columns: 1fr !important; /* Menjadikan 1 kolom ke bawah */
+                gap: 24px !important; /* Memperkecil jarak antar elemen */
+                padding: 0 16px !important;
+            }
+            .detail-section {
+                padding: 40px 0 !important; /* Memperkecil padding atas-bawah */
+            }
+            .detail-media {
+                position: static !important; /* Mematikan fungsi melayang (sticky) di HP */
+                padding: 10px !important;
+            }
+            .image-placeholder.large {
+                height: 260px !important; /* Memperkecil tinggi placeholder gambar di HP */
+            }
+            .detail-price {
+                font-size: 1.8rem !important; /* Memperkecil ukuran teks harga agar tidak jomplang */
+            }
+        }
+    </style>
+
     <section class="detail-section" style="background-color: #fafafa; padding: 80px 0; font-family: system-ui, -apple-system, sans-serif;">
         <div class="container detail-grid" style="max-width: 1100px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 50px; align-items: start;">
             
             <div class="detail-media" style="background-color: #ffffff; border-radius: 16px; border: 1px solid #e5e7eb; padding: 16px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02); position: sticky; top: 100px;">
                 @if ($product->image_path)
-                    <img src="{{ asset('storage/'.$product->image_path) }}" alt="{{ $product->name }}" style="width: 100%; height: auto; max-height: 450px; object-fit: cover; border-radius: 12px;">
+                    <img src="{{ asset('storage/'.$product->image_path) }}" alt="{{ $product->name }}" style="width: 100%; height: auto; max-height: 450px; object-fit: cover; border-radius: 12px; display: block;">
                 @else
                     <div class="image-placeholder large" style="width: 100%; height: 350px; background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
                         <span style="font-size: 3.5rem; font-weight: 800; color: #94a3b8; letter-spacing: 2px;">{{ strtoupper(substr($product->name, 0, 2)) }}</span>
