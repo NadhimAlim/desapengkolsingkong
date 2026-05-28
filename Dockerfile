@@ -1,6 +1,6 @@
 FROM php:8.3-fpm-alpine
 
-# 1. Install dependensi sistem, Nginx, dan driver SQLite
+# 1. Install dependensi sistem, Nginx, driver SQLite, dan NodeJS + NPM untuk Vite
 RUN apk add --no-cache \
     nginx \
     curl \
@@ -8,7 +8,9 @@ RUN apk add --no-cache \
     libxml2-dev \
     zip \
     unzip \
-    sqlite-dev
+    sqlite-dev \
+    nodejs \
+    npm
 
 # 2. Install ekstensi PHP yang dibutuhkan Laravel & SQLite
 RUN docker-php-ext-install pdo_mysql pdo_sqlite bcmath gd
@@ -25,7 +27,10 @@ COPY . .
 # 6. Jalankan instalasi dependensi PHP (Production Mode)
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# 7. Buat konfigurasi Nginx yang benar (UBAH KE PORT 80)
+# 7. Install dependensi Javascript dan COMPILE ASET VITE (Mengatasi Vite Manifest Error)
+RUN npm install && npm run build
+
+# 8. Buat konfigurasi Nginx yang benar (Port 80)
 RUN echo 'server { \
     listen 80; \
     root /var/www/html/public; \
@@ -49,14 +54,14 @@ RUN echo 'server { \
     } \
 }' > /etc/nginx/http.d/default.conf
 
-# 8. Atur hak akses folder storage dan database agar bisa ditulis (writable)
+# 9. Atur hak akses folder storage dan database agar bisa ditulis (writable)
 RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache \
     && chown -R www-data:www-data /var/www/html
 
-# 9. Expose port 80 (Samakan dengan PHP Native)
+# 10. Expose port 80 (Samakan dengan PHP Native)
 EXPOSE 80
 
-# 10. Sentuhan Akhir: Buat folder database, jalankan migrasi, dan pastikan server Nginx TETAP MENYALA
+# 11. Sentuhan Akhir: Buat folder database, jalankan migrasi, dan pastikan server Nginx TETAP MENYALA
 CMD mkdir -p /var/www/html/database /var/www/html/storage/framework/sessions /var/www/html/storage/framework/views /var/www/html/storage/framework/cache \
     && touch /var/www/html/database/database.sqlite \
     && chmod -R 777 /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database \
