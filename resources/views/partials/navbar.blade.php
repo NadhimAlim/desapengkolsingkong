@@ -1,5 +1,5 @@
-<nav class="navbar" data-nav style="background-color: #ffffff; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); padding: 15px 0; position: sticky; top: 0; z-index: 1000; font-family: system-ui, sans-serif;">
-    <div class="container nav-inner" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between;">
+<nav class="navbar" data-nav style="background-color: #ffffff; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); padding: 15px 0; position: sticky; top: 0; z-index: 1000; font-family: system-ui, sans-serif;">
+    <div class="container nav-inner" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; position: relative;">
         
         <a href="{{ route('home') }}" class="brand" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #1a2f1b;">
             <span class="brand-mark" style="background-color: #1a2f1b; color: #ffffff; padding: 8px 12px; border-radius: 8px; font-weight: bold; font-size: 1.1rem;">SP</span>
@@ -9,22 +9,138 @@
             </span>
         </a>
 
-        <button class="nav-toggle" type="button" data-nav-toggle aria-label="Buka menu" style="background: none; border: none; cursor: pointer; display: none; flex-direction: column; gap: 5px;">
-            <span style="display: block; width: 25px; height: 3px; background-color: #1a2f1b; border-radius: 2px;"></span>
-            <span style="display: block; width: 25px; height: 3px; background-color: #1a2f1b; border-radius: 2px;"></span>
-            <span style="display: block; width: 25px; height: 3px; background-color: #1a2f1b; border-radius: 2px;"></span>
+        <button type="button" id="tombol-garis-tiga" aria-label="Buka menu">
+            <span class="baris-1"></span>
+            <span class="baris-2"></span>
+            <span class="baris-3"></span>
         </button>
 
-        <div class="nav-links" data-nav-menu style="display: flex; align-items: center; gap: 28px;">
-            <a href="{{ route('home') }}#profil" style="color: #4b5563; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; position: relative;" onmouseover="this.style.color='#047857'" onmouseout="this.style.color='#4b5563'">Profil</a>
+        <div class="nav-links" id="nav-menu">
+            <a href="{{ route('home') }}#profil" style="color: #4b5563; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s;" onmouseover="this.style.color='#047857'" onmouseout="this.style.color='#4b5563'">Profil</a>
             <a href="{{ route('products.index') }}" style="color: #4b5563; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s;" onmouseover="this.style.color='#047857'" onmouseout="this.style.color='#4b5563'">Produk</a>
             <a href="{{ route('articles.index') }}" style="color: #4b5563; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s;" onmouseover="this.style.color='#047857'" onmouseout="this.style.color='#4b5563'">Artikel</a>
             <a href="{{ route('home') }}#kontak" style="color: #4b5563; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s;" onmouseover="this.style.color='#047857'" onmouseout="this.style.color='#4b5563'">Kontak</a>
             
-            <a href="{{ route('login') }}" class="btn btn-dark btn-sm" style="background-color: #1a2f1b; color: #ffffff; text-decoration: none; font-size: 0.9rem; font-weight: 500; padding: 8px 18px; border-radius: 6px; box-shadow: 0 2px 4px rgba(26, 47, 27, 0.2); transition: all 0.2s;" onmouseover="this.style.backgroundColor='#2e5a31'; this.style.transform='translateY(-1px)';" onmouseout="this.style.backgroundColor='#1a2f1b'; this.style.transform='translateY(0)';">
+            <a href="{{ route('login') }}" class="btn btn-dark btn-sm" style="background-color: #1a2f1b; color: #ffffff; text-decoration: none; font-size: 0.9rem; font-weight: 500; padding: 10px 18px; border-radius: 6px; box-shadow: 0 2px 4px rgba(26, 47, 27, 0.2); transition: all 0.2s; text-align: center; display: block;" onmouseover="this.style.backgroundColor='#2e5a31';" onmouseout="this.style.backgroundColor='#1a2f1b';">
                 Admin
             </a>
         </div>
 
     </div>
 </nav>
+
+<style>
+    /* Tombol garis 3 disembunyikan di laptop */
+    #tombol-garis-tiga {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        flex-direction: column;
+        gap: 5px;
+        padding: 10px;
+        z-index: 2000;
+    }
+
+    #tombol-garis-tiga span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: #1a2f1b;
+        border-radius: 2px;
+        transition: 0.3s;
+    }
+
+    /* Tampilan khusus Desktop / Laptop */
+    @media (min-width: 769px) {
+        #nav-menu {
+            display: flex !important;
+            align-items: center;
+            gap: 28px;
+        }
+    }
+
+    /* Tampilan khusus Handphone / Tablet */
+    @media (max-width: 768px) {
+        #tombol-garis-tiga {
+            display: flex !important; /* Paksa tombol garis tiga muncul */
+            position: absolute !important;
+            right: 20px !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+        }
+
+        #nav-menu {
+            display: none !important; /* Sembunyikan menu kotak putih saat pertama buka */
+            flex-direction: column !important;
+            position: absolute !important;
+            top: 100% !important;
+            left: 0 !important;
+            width: 100% !important;
+            background-color: #ffffff !important;
+            padding: 20px !important;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+            gap: 15px !important;
+            box-sizing: border-box !important;
+            border-top: 1px solid #f3f4f6 !important;
+            z-index: 1500 !important;
+        }
+
+        /* Kelas bantuan saat menu aktif dibuka */
+        #nav-menu.tampilkan-menu {
+            display: flex !important;
+        }
+
+        #nav-menu a {
+            display: block !important;
+            width: 100% !important;
+            padding: 12px 0 !important;
+            border-bottom: 1px solid #f3f4f6 !important;
+            box-sizing: border-box;
+        }
+        
+        #nav-menu a.btn {
+            border-bottom: none !important;
+            margin-top: 8px !important;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const tombol = document.getElementById('tombol-garis-tiga');
+        const menuUtama = document.getElementById('nav-menu');
+
+        if(tombol && menuUtama) {
+            tombol.addEventListener('click', function (e) {
+                e.stopPropagation(); 
+                menuUtama.classList.toggle('tampilkan-menu');
+                
+                // Animasi transform garis tiga menjadi silang (X)
+                const b1 = tombol.querySelector('.baris-1');
+                const b2 = tombol.querySelector('.baris-2');
+                const b3 = tombol.querySelector('.baris-3');
+
+                if (menuUtama.classList.contains('tampilkan-menu')) {
+                    b1.style.transform = 'rotate(45deg) translate(5px, 5px)';
+                    b2.style.opacity = '0';
+                    b3.style.transform = 'rotate(-45deg) translate(6px, -6px)';
+                } else {
+                    b1.style.transform = 'none';
+                    b2.style.opacity = '1';
+                    b3.style.transform = 'none';
+                }
+            });
+
+            // Tutup menu otomatis jika area luar diklik
+            document.addEventListener('click', function () {
+                if(menuUtama.classList.contains('tampilkan-menu')) {
+                    menuUtama.classList.remove('tampilkan-menu');
+                    tombol.querySelector('.baris-1').style.transform = 'none';
+                    tombol.querySelector('.baris-2').style.opacity = '1';
+                    tombol.querySelector('.baris-3').style.transform = 'none';
+                }
+            });
+        }
+    });
+</script>
