@@ -25,9 +25,9 @@ COPY . .
 # 6. Jalankan instalasi dependensi PHP (Production Mode)
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# 7. Buat konfigurasi Nginx yang benar (Hanya ada SATU 'location /')
+# 7. Buat konfigurasi Nginx yang benar (UBAH KE PORT 80)
 RUN echo 'server { \
-    listen 3000; \
+    listen 80; \
     root /var/www/html/public; \
     index index.php index.html; \
     charset utf-8; \
@@ -53,8 +53,8 @@ RUN echo 'server { \
 RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache \
     && chown -R www-data:www-data /var/www/html
 
-# 9. Expose port 3000 sesuai settingan di Coolify Anda
-EXPOSE 3000
+# 9. Expose port 80 (Samakan dengan PHP Native)
+EXPOSE 80
 
 # 10. Sentuhan Akhir: Pastikan file sqlite dibuat, jalankan seeder/migrate, lalu start server
 CMD touch /var/www/html/database/database.sqlite \
