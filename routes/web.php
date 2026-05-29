@@ -47,3 +47,5 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     // CRUD Anggota UMKM Desa Pengkol
     Route::resource('members', MemberController::class); 
 });
+// Rute untuk menangani pengiriman formulir pesanan via website
+Route::post('/produk/{product}/order', [ProductController::class, 'storeOrder'])->name('products.order');

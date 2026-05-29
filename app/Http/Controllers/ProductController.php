@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use App\Models\Order; // 👈 Pastikan import model Order ini di bagian atas!
 
 class ProductController extends Controller
 {
@@ -20,4 +23,5 @@ class ProductController extends Controller
 
         return view('products.show', compact('product'));
     }
+    
 }

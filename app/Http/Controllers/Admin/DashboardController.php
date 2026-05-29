@@ -54,6 +54,8 @@ class DashboardController extends Controller
 
             // KIRIM DATA ANGGOTA DENGAN PAGINATE (Jangan pakai take()->get() lagi biar tidak rusak)
             'recentMembers'         => $recentMembers,
+
+            
         ]);
     }
 }
