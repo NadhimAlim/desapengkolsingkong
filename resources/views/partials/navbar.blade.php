@@ -9,28 +9,41 @@
             </span>
         </a>
 
-        <button type="button" id="tombol-garis-tiga" aria-label="Buka menu">
-            <span class="baris-1"></span>
-            <span class="baris-2"></span>
-            <span class="baris-3"></span>
-        </button>
-
         <div class="nav-links" id="nav-menu">
             <a href="{{ route('home') }}#profil" style="color: #4b5563; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s;" onmouseover="this.style.color='#047857'" onmouseout="this.style.color='#4b5563'">Profil</a>
             <a href="{{ route('products.index') }}" style="color: #4b5563; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s;" onmouseover="this.style.color='#047857'" onmouseout="this.style.color='#4b5563'">Produk</a>
             <a href="{{ route('articles.index') }}" style="color: #4b5563; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s;" onmouseover="this.style.color='#047857'" onmouseout="this.style.color='#4b5563'">Artikel</a>
             <a href="{{ route('home') }}#kontak" style="color: #4b5563; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s;" onmouseover="this.style.color='#047857'" onmouseout="this.style.color='#4b5563'">Kontak</a>
             
+            <div class="language-wrapper" style="position: relative; display: inline-block;">
+                <select id="language-switcher" onchange="changeLanguage(this.value)" style="background-color: #f1f5f9; color: #1e293b; font-size: 0.85rem; font-weight: 600; padding: 8px 12px; border-radius: 6px; border: 1px solid #cbd5e1; cursor: pointer; outline: none; font-family: inherit;">
+                    <option value="id">🇮🇩 Indonesia</option>
+                    <option value="en">🇺🇸 English</option>
+                </select>
+            </div>
+
             <a href="{{ route('login') }}" class="btn btn-dark btn-sm" style="background-color: #1a2f1b; color: #ffffff; text-decoration: none; font-size: 0.9rem; font-weight: 500; padding: 10px 18px; border-radius: 6px; box-shadow: 0 2px 4px rgba(26, 47, 27, 0.2); transition: all 0.2s; text-align: center; display: block;" onmouseover="this.style.backgroundColor='#2e5a31';" onmouseout="this.style.backgroundColor='#1a2f1b';">
                 Admin
             </a>
         </div>
 
+        <button type="button" id="tombol-garis-tiga" aria-label="Buka menu">
+            <span class="baris-1"></span>
+            <span class="baris-2"></span>
+            <span class="baris-3"></span>
+        </button>
+
     </div>
 </nav>
 
+<div id="google_translate_element" style="display:none;"></div>
+
 <style>
-    /* Tombol garis 3 disembunyikan di laptop */
+    /* Menghilangkan pop-up banner bawaan Google Translate agar web tetap bersih & professional */
+    .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon, .goog-te-gadget span { display: none !important; }
+    body { top: 0px !important; }
+    .goog-te-balloon-frame { display: none !important; }
+
     #tombol-garis-tiga {
         display: none;
         background: none;
@@ -51,7 +64,7 @@
         transition: 0.3s;
     }
 
-    /* Tampilan khusus Desktop / Laptop */
+    /* Tampilan Desktop */
     @media (min-width: 769px) {
         #nav-menu {
             display: flex !important;
@@ -60,10 +73,10 @@
         }
     }
 
-    /* Tampilan khusus Handphone / Tablet */
+    /* Tampilan HP & Tablet */
     @media (max-width: 768px) {
         #tombol-garis-tiga {
-            display: flex !important; /* Paksa tombol garis tiga muncul */
+            display: flex !important;
             position: absolute !important;
             right: 20px !important;
             top: 50% !important;
@@ -71,7 +84,7 @@
         }
 
         #nav-menu {
-            display: none !important; /* Sembunyikan menu kotak putih saat pertama buka */
+            display: none !important;
             flex-direction: column !important;
             position: absolute !important;
             top: 100% !important;
@@ -86,17 +99,21 @@
             z-index: 1500 !important;
         }
 
-        /* Kelas bantuan saat menu aktif dibuka */
         #nav-menu.tampilkan-menu {
             display: flex !important;
         }
 
-        #nav-menu a {
+        #nav-menu a, .language-wrapper {
             display: block !important;
             width: 100% !important;
             padding: 12px 0 !important;
             border-bottom: 1px solid #f3f4f6 !important;
             box-sizing: border-box;
+        }
+
+        #language-switcher {
+            width: 100% !important;
+            padding: 12px !important;
         }
         
         #nav-menu a.btn {
@@ -107,7 +124,69 @@
 </style>
 
 <script>
+    // 1. Inisialisasi awal Google Translate Engine
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'id', 
+            includedLanguages: 'id,en', 
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+            autoDisplay: false
+        }, 'google_translate_element');
+    }
+
+    // 2. Fungsi saat user mengubah pilihan dropdown bahasa
+    function changeLanguage(langCode) {
+        // Simpan pilihan bahasa di memori browser lokal agar konisten saat pindah halaman
+        localStorage.setItem('pilihan_bahasa_umkm', langCode);
+
+        // Pasang cookie format resmi Google Translate
+        document.cookie = "googtrans=/id/" + langCode + "; path=/;";
+        document.cookie = "googtrans=/id/" + langCode + "; domain=" + window.location.hostname + "; path=/;";
+
+        // Eksekusi perubahan ke komponen inti Google
+        const googleSelect = document.querySelector('.goog-te-combo');
+        if (googleSelect) {
+            googleSelect.value = langCode;
+            googleSelect.dispatchEvent(new Event('change'));
+        } else {
+            // Pengaman: Jika engine google belum siap saat diklik, refresh halaman untuk memicu cookie baru
+            window.location.reload();
+        }
+    }
+
+    // 3. Sistem Otomatis saat halaman baru selesai dimuat (Mengingat Bahasa)
     document.addEventListener('DOMContentLoaded', function () {
+        // Ambil data memori bahasa yang pernah diklik sebelumnya
+        const bahasaTerakhir = localStorage.getItem('pilihan_bahasa_umkm');
+
+        // Jika memori menemukan bahasa Inggris, pasang paksa cookie sebelum engine google termuat
+        if (bahasaTerakhir === 'en') {
+            document.cookie = "googtrans=/id/en; path=/;";
+            const switcher = document.getElementById('language-switcher');
+            if (switcher) switcher.value = 'en';
+        }
+
+        // Load core library Google Translate secara aman (Asynchronous)
+        const script = document.createElement('script');
+        script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+        document.body.appendChild(script);
+
+        // Pengaman sinkronisasi visual tombol dropdown agar posisinya pas
+        setTimeout(() => {
+            const switcher = document.getElementById('language-switcher');
+            if (switcher && bahasaTerakhir) {
+                switcher.value = bahasaTerakhir;
+                
+                // Trigger perubahan jika Google Engine mendeteksi ketidaksesuaian data
+                const googleSelect = document.querySelector('.goog-te-combo');
+                if (googleSelect && googleSelect.value !== bahasaTerakhir) {
+                    googleSelect.value = bahasaTerakhir;
+                    googleSelect.dispatchEvent(new Event('change'));
+                }
+            }
+        }, 1000);
+
+        // 4. Logik Operasional Tombol Hamburger Menu Layar HP
         const tombol = document.getElementById('tombol-garis-tiga');
         const menuUtama = document.getElementById('nav-menu');
 
@@ -116,7 +195,6 @@
                 e.stopPropagation(); 
                 menuUtama.classList.toggle('tampilkan-menu');
                 
-                // Animasi transform garis tiga menjadi silang (X)
                 const b1 = tombol.querySelector('.baris-1');
                 const b2 = tombol.querySelector('.baris-2');
                 const b3 = tombol.querySelector('.baris-3');
@@ -132,7 +210,6 @@
                 }
             });
 
-            // Tutup menu otomatis jika area luar diklik
             document.addEventListener('click', function () {
                 if(menuUtama.classList.contains('tampilkan-menu')) {
                     menuUtama.classList.remove('tampilkan-menu');
