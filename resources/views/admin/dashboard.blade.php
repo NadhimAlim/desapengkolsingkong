@@ -25,9 +25,21 @@
             <strong>{{ $articleCount }}</strong>
         </div>
         
-        <div class="metric-card">
-            <span>Artikel Publik</span>
-            <strong>{{ $publishedArticleCount }}</strong>
+        
+
+        <div class="metric-card" style="border-left: 4px solid #3b82f6;">
+            <span>Pengunjung Hari Ini</span>
+            <strong>{{ number_format($todayVisitors, 0, ',', '.') }}</strong>
+        </div>
+
+        <div class="metric-card" style="border-left: 4px solid #f59e0b;">
+            <span>Pengunjung Bulan Ini</span>
+            <strong>{{ number_format($monthVisitors, 0, ',', '.') }}</strong>
+        </div>
+
+        <div class="metric-card" style="border-left: 4px solid #10b981;">
+            <span>Total Pengunjung</span>
+            <strong>{{ number_format($totalVisitors, 0, ',', '.') }}</strong>
         </div>
     </section>
 

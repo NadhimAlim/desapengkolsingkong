@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('visitor_counts', function (Blueprint $table) {
             $table->id();
-            $table->string('page_name')->default('home'); // Untuk melacak halaman tertentu jika diperlukan
-            $table->unsignedBigInteger('views_count')->default(0);
+            $table->string('page_name')->default('home');
+            $table->date('visit_date'); // Kolom baru untuk mencatat tanggal kunjungan (YYYY-MM-DD)
+            $table->integer('views_count')->default(0);
             $table->timestamps();
         });
     }

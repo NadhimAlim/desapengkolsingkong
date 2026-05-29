@@ -14,6 +14,20 @@ class DashboardController extends Controller
     {
         abort_unless(auth()->user()?->is_admin, 403);
 
+        // 1. Hitung Kunjungan HARI INI saja
+        $todayVisitors = VisitorCount::where('page_name', 'home')
+            ->whereDate('visit_date', now()->toDateString())
+            ->sum('views_count');
+
+        // 2. Hitung Kunjungan BULAN INI saja (Gabungan semua hari di bulan ini)
+        $monthVisitors = VisitorCount::where('page_name', 'home')
+            ->whereMonth('visit_date', now()->month)
+            ->whereYear('visit_date', now()->year)
+            ->sum('views_count');
+
+        // 3. Hitung TOTAL KUNJUNGAN dari awal sampai sekarang
+        $totalVisitors = VisitorCount::where('page_name', 'home')->sum('views_count');
+
         // Mengambil jumlah kunjungan dari database, jika belum ada datanya maka kembalikan nilai 0
         $totalVisitors = VisitorCount::where('page_name', 'home')->value('views_count') ?? 0;
 
@@ -25,6 +39,11 @@ class DashboardController extends Controller
             'recentProducts' => Product::latest()->take(5)->get(),
             'recentArticles' => Article::latest()->take(5)->get(),
             'totalVisitors' => $totalVisitors, // Variabel baru sukses dikirim ke Blade Dashboard Anda
+
+            // Kirim 3 data statistik baru ke Blade Admin
+            'todayVisitors' => $todayVisitors,
+            'monthVisitors' => $monthVisitors,
+            'totalVisitors' => $totalVisitors,
         ]);
     }
 }
