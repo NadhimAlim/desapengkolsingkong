@@ -6,10 +6,11 @@
     <section class="hero">
         <div class="container hero-grid">
             <div class="hero-copy">
-                <span class="eyebrow">PPKO Desa Pengkol</span>
-                <h1>Olahan singkong lokal yang renyah, bernilai, dan siap dikenal lebih luas.</h1>
-                <p>Website UMKM Desa Pengkol membantu warga memasarkan produk berbahan singkong seperti keripik, kerupuk,
-                    dan camilan rumahan dengan tampilan profesional.</p>
+                <span class="eyebrow">Eksplorasi Rasa Autentik Desa Pengkol</span>
+                <h1>Mengangkat Singkong Lokal Menjadi Camilan Premium Mendunia.</h1>
+                <p>Platform digital UMKM Desa Pengkol yang mengintegrasikan potensi pertanian lokal dengan inovasi modern,
+                    menghadirkan varian keripik dan kerupuk berkualitas tinggi langsung dari dapur para perajin rumah
+                    tangga.</p>
                 <div class="hero-actions">
                     <a href="{{ route('products.index') }}" class="btn btn-dark">Lihat Produk</a>
                     <a href="{{ route('articles.index') }}" class="btn btn-outline">Baca Artikel</a>
@@ -17,7 +18,7 @@
                 <div class="stats-row">
                     <div><strong>{{ $productCount }}+</strong><span>Produk terdata</span></div>
                     <div><strong>100%</strong><span>Singkong lokal</span></div>
-                    <div><strong>PPKO</strong><span>Desa Pengkol</span></div>
+                    <div><strong>Pengkol</strong><span>Nglipar GunungKidul</span></div>
                 </div>
             </div>
             <div class="hero-visual" aria-label="Produk olahan singkong">
