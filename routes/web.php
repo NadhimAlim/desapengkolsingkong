@@ -8,6 +8,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\MemberController;
 
 Route::get('/', HomeController::class)->name('home');
 Route::get('/produk', [ProductController::class, 'index'])->name('products.index');
@@ -26,4 +27,15 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/', DashboardController::class)->name('dashboard');
     Route::resource('products', AdminProductController::class)->except('show');
     Route::resource('articles', AdminArticleController::class)->except('show');
+});
+
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    // Route yang sudah ada sebelumnya...
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
+    Route::resource('products', ProductController::class);
+    Route::resource('articles', ArticleController::class);
+    
+    // ➕ TAMBAHKAN BARIS INI:
+    Route::resource('members', MemberController::class); 
+    
 });

@@ -7,6 +7,7 @@ use App\Models\Article;
 use App\Models\Product;
 use App\Models\VisitorCount; // Ditambahkan untuk mengambil data jumlah pengunjung
 use Illuminate\View\View;
+use App\Models\Member; // Ditambahkan untuk mengambil data anggota terbaru
 
 class DashboardController extends Controller
 {
@@ -31,6 +32,9 @@ class DashboardController extends Controller
         // Mengambil jumlah kunjungan dari database, jika belum ada datanya maka kembalikan nilai 0
         $totalVisitors = VisitorCount::where('page_name', 'home')->value('views_count') ?? 0;
 
+        // Mengambil data anggota dengan sistem PAGINASI (Maksimal 5 data per halaman)
+        $recentMembers = Member::latest()->paginate(5);
+
         return view('admin.dashboard', [
             'productCount' => Product::count(),
             'articleCount' => Article::count(),
@@ -44,6 +48,12 @@ class DashboardController extends Controller
             'todayVisitors' => $todayVisitors,
             'monthVisitors' => $monthVisitors,
             'totalVisitors' => $totalVisitors,
+
+            // 2. AMBIL DATA ANGGOTA TERBARU DARI DATABASE
+            'recentMembers' => Member::latest()->take(5)->get(),
+
+            // KIRIM DATA ANGGOTA DENGAN PAGINATE (Jangan pakai take()->get() lagi biar tidak rusak)
+            'recentMembers'         => $recentMembers,
         ]);
     }
 }
