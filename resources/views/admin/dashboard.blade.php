@@ -5,18 +5,26 @@
 
 @section('content')
     <section class="metric-grid">
+        <div class="metric-card" style="border-left: 4px solid #10b981;">
+            <span>Total Pengunjung</span>
+            <strong>{{ number_format($totalVisitors, 0, ',', '.') }}</strong>
+        </div>
+
         <div class="metric-card">
-            <span>Total Produk</span>
+            <span>Total Porduk</span>
             <strong>{{ $productCount }}</strong>
         </div>
+        
         <div class="metric-card">
             <span>Produk Publik</span>
             <strong>{{ $publishedProductCount }}</strong>
         </div>
+        
         <div class="metric-card">
             <span>Total Artikel</span>
             <strong>{{ $articleCount }}</strong>
         </div>
+        
         <div class="metric-card">
             <span>Artikel Publik</span>
             <strong>{{ $publishedArticleCount }}</strong>
