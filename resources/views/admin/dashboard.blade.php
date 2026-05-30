@@ -84,14 +84,22 @@
             style="grid-column: span 2; margin-top: 28px; background: #ffffff; padding: 24px; border-radius: 10px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid #e5e7eb;">
 
             <div class="panel-head"
-                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid #f3f4f6;">
-                <h2 style="margin: 0; font-size: 1.2rem; color: #1f2937; font-weight: 700;">Daftar Anggota UMKM</h2>
-                <a href="{{ route('admin.members.create') }}" class="btn btn-dark btn-sm"
-                    style="background-color: #10b981; border: none; color: white; text-decoration: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; transition: background-color 0.2s;">
-                    Tambah Anggota
-                </a>
-            </div>
+    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid #f3f4f6;">
+    <h2 style="margin: 0; font-size: 1.2rem; color: #1f2937; font-weight: 700;">Daftar Anggota UMKM</h2>
+    
+    <div style="display: flex; gap: 10px;">
+        <a href="{{ route('admin.members.download-pdf') }}" class="btn btn-danger btn-sm" target="_blank"
+            style="background-color: #ef4444; border: none; color: white; text-decoration: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; transition: background-color 0.2s;">
+            <svg style="width: 16px; height: 16px; margin-right: 6px; fill: currentColor;" viewBox="0 0 20 20"><path d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 2v3a1 1 0 001 1h3m-3 7a1 1 0 11-2 0v-3a1 1 0 112 0v3z"></path></svg>
+            Cetak PDF
+        </a>
 
+        <a href="{{ route('admin.members.create') }}" class="btn btn-dark btn-sm"
+            style="background-color: #10b981; border: none; color: white; text-decoration: none; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; transition: background-color 0.2s;">
+            Tambah Anggota
+        </a>
+    </div>
+</div>
             <div class="simple-list" style="display: flex; flex-direction: column; gap: 4px;">
                 @forelse ($recentMembers ?? [] as $member)
                     <div

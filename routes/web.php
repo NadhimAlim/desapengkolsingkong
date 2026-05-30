@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
+
 // ==========================================
 // RUTE HALAMAN DEPAN (PUBLIC VIEW)
 // ==========================================
@@ -18,6 +19,10 @@ Route::get('/produk', [ProductController::class, 'index'])->name('products.index
 Route::get('/produk/{product:slug}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/artikel', [ArticleController::class, 'index'])->name('articles.index');
 Route::get('/artikel/{article:slug}', [ArticleController::class, 'show'])->name('articles.show');
+
+// Rute untuk menangani pengiriman formulir pesanan via website
+Route::post('/produk/{product}/order', [ProductController::class, 'storeOrder'])->name('products.order');
+
 
 // ==========================================
 // RUTE OTENTIKASI (LOGIN / LOGOUT)
@@ -28,6 +33,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
+
 
 // ==========================================
 // RUTE MANAGEMENT ADMIN (SATU GROUP SOLID)
@@ -44,8 +50,13 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     // CRUD Artikel (Memakai AdminArticleController yang Benar)
     Route::resource('articles', AdminArticleController::class)->except('show');
     
-    // CRUD Anggota UMKM Desa Pengkol
-    Route::resource('members', MemberController::class); 
+    // ==========================================
+    // KHUSUS FITUR ANGGOTA UMKM DESA PENGKOL
+    // ==========================================
+    
+    // 1. Taruh Custom Route PDF di ATAS Resource agar tidak bentrok dengan fungsi show()
+    Route::get('members/download-pdf', [MemberController::class, 'downloadPdf'])->name('members.download-pdf');
+
+    // 2. Taruh Resource Route di bawahnya dan batasi fungsi show jika tidak digunakan
+    Route::resource('members', MemberController::class)->except('show'); 
 });
-// Rute untuk menangani pengiriman formulir pesanan via website
-Route::post('/produk/{product}/order', [ProductController::class, 'storeOrder'])->name('products.order');

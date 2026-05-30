@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Member;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf; // <-- TAMBAHKAN BARIS INI
 
 class MemberController extends Controller
 {
@@ -71,5 +72,16 @@ class MemberController extends Controller
         $member->delete();
 
         return redirect()->route('admin.dashboard')->with('success', 'Data anggota UMKM berhasil dihapus!');
+    }
+    public function downloadPdf()
+    {
+        // Ambil semua data anggota
+        $members = Member::all(); 
+
+        // Load view PDF dan lempar datanya
+        $pdf = Pdf::loadView('admin.members.pdf', compact('members'));
+        
+        // Unduh file PDF
+        return $pdf->download('Laporan_Resmi_Anggota_UMKM.pdf');
     }
 }

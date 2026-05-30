@@ -3,98 +3,137 @@
 @section('title', 'UMKM Singkong Desa Pengkol')
 
 @section('content')
-    <section class="hero"
-        style="background-color: #fafafa; padding: 60px 0; font-family: system-ui, -apple-system, sans-serif;">
+    <section class="hero fade-in-section"
+        style="background-color: #f4f5f7; padding: 80px 0; font-family: system-ui, -apple-system, sans-serif; perspective: 1000px; overflow: hidden;">
+
         <div class="container hero-grid"
             style="max-width: 1200px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;">
 
-            <div class="hero-copy" style="display: flex; flex-direction: column; gap: 20px;">
+            <div class="hero-copy"
+                style="display: flex; flex-direction: column; gap: 20px; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); transform-style: preserve-3d;"
+                onmouseenter="this.style.transform='translateZ(20px)'" onmouseleave="this.style.transform='translateZ(0px)'">
+
                 <span class="eyebrow"
-                    style="color: #15803d; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">
+                    style="color: #16803d; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px; transform: translateZ(10px);">
                     Eksplorasi Rasa Autentik Desa Pengkol
                 </span>
+
                 <h1
-                    style="font-size: clamp(2rem, 4vw, 3.2rem); color: #111827; font-weight: 800; line-height: 1.15; margin: 0; letter-spacing: -1px;">
+                    style="font-size: clamp(2rem, 4vw, 3.2rem); color: #111827; font-weight: 800; line-height: 1.15; margin: 0; letter-spacing: -1px; transform: translateZ(30px); text-shadow: 0 2px 4px rgba(0,0,0,0.05);">
                     Mengangkat Singkong Lokal Menjadi Camilan Premium Mendunia.
                 </h1>
-                <p style="color: #4b5563; font-size: 1.1rem; line-height: 1.6; margin: 0;">
+
+                <p style="color: #4b5563; font-size: 1.1rem; line-height: 1.6; margin: 0; transform: translateZ(15px);">
                     Platform digital UMKM Desa Pengkol yang mengintegrasikan potensi pertanian lokal dengan inovasi modern,
                     menghadirkan varian keripik dan kerupuk berkualitas tinggi langsung dari dapur para perajin rumah
                     tangga.
                 </p>
 
-                <div class="hero-actions" style="display: flex; gap: 16px; margin-top: 8px;">
+                <div class="hero-actions" style="display: flex; gap: 16px; margin-top: 8px; transform: translateZ(25px);">
                     <a href="{{ route('products.index') }}" class="btn btn-dark"
-                        style="background-color: #111827; color: #ffffff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.2s;">
+                        style="background-color: #111827; color: #ffffff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.3s; display: inline-block;"
+                        onmouseover="this.style.transform='translateY(-4px) translateZ(10px)'; this.style.boxShadow='0 12px 20px rgba(0,0,0,0.15)'"
+                        onmouseout="this.style.transform='translateY(0) translateZ(0)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.1)'">
                         Lihat Produk
                     </a>
                     <a href="{{ route('articles.index') }}" class="btn btn-outline"
-                        style="background-color: #ffffff; color: #374151; border: 1px solid #d1d5db; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.2s;">
+                        style="background-color: #ffffff; color: #374151; border: 1px solid #d1d5db; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: all 0.3s; display: inline-block;"
+                        onmouseover="this.style.transform='translateY(-4px) translateZ(10px)'; this.style.boxShadow='0 12px 20px rgba(0,0,0,0.1)'"
+                        onmouseout="this.style.transform='translateY(0) translateZ(0)'; this.style.boxShadow='0 4px 6px rgba(0,0,0,0.05)'">
                         Baca Artikel
                     </a>
                 </div>
 
                 <div class="stats-row"
-                    style="display: flex; gap: 24px; margin-top: 16px; border-top: 1px solid #e5e7eb; padding-top: 24px;">
-                    <div><strong
-                            style="display: block; font-size: 1.5rem; color: #111827; font-weight: 800;">{{ $productCount }}+</strong><span
-                            style="font-size: 0.85rem; color: #6b7280;">Produk terdata</span></div>
-                    <div><strong
-                            style="display: block; font-size: 1.5rem; color: #111827; font-weight: 800;">100%</strong><span
-                            style="font-size: 0.85rem; color: #6b7280;">Singkong lokal</span></div>
-                    <div><strong
-                            style="display: block; font-size: 1.5rem; color: #111827; font-weight: 800;">Pengkol</strong><span
-                            style="font-size: 0.85rem; color: #6b7280;">Nglipar GunungKidul</span></div>
+                    style="display: flex; gap: 24px; margin-top: 16px; border-top: 1px solid #e5e7eb; padding-top: 24px; transform: translateZ(10px);">
+                    <div>
+                        <strong
+                            style="display: block; font-size: 1.5rem; color: #111827; font-weight: 800;">{{ $productCount }}+</strong>
+                        <span style="font-size: 0.85rem; color: #6b7280;">Produk terdata</span>
+                    </div>
+                    <div>
+                        <strong style="display: block; font-size: 1.5rem; color: #111827; font-weight: 800;">100%</strong>
+                        <span style="font-size: 0.85rem; color: #6b7280;">Singkong lokal</span>
+                    </div>
+                    <div>
+                        <strong
+                            style="display: block; font-size: 1.5rem; color: #111827; font-weight: 800;">Pengkol</strong>
+                        <span style="font-size: 0.85rem; color: #6b7280;">Nglipar GunungKidul</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="hero-visual-new" style="width: 100%; display: flex; justify-content: center; align-items: center;">
-                <div
-                    style="position: relative; width: 100%; max-width: 500px; aspect-ratio: 1 / 1; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);">
-                    <img src="{{ asset('images/herosingkong.png') }}" alt="Produk Olahan Singkong Premium Desa Pengkol"
-                        style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <div class="hero-visual-new"
+                style="width: 100%; display: flex; justify-content: center; align-items: center; perspective: 1000px;">
+                <div class="card-3d"
+                    style="position: relative; width: 100%; max-width: 460px; aspect-ratio: 1 / 1; border-radius: 24px; overflow: visible; transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); transform-style: preserve-3d; background: #ffffff; padding: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.02); transform: rotateX(6deg) rotateY(-12deg);"
+                    onmousemove="let box = this.getBoundingClientRect(); let x = (event.clientX - box.left) / box.width - 0.5; let y = (event.clientY - box.top) / box.height - 0.5; this.style.transform = `rotateX(${-y * 30}deg) rotateY(${x * 30}deg) translateZ(15px)`; this.style.boxShadow = `${-x * 30}px ${-y * 30}px 40px rgba(0,0,0,0.15)`;"
+                    onmouseleave="this.style.transform='rotateX(6deg) rotateY(-12deg) translateZ(0)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.08)';">
+
+                    <div
+                        style="width: 100%; height: 100%; border-radius: 16px; overflow: hidden; transform: translateZ(10px); transform-style: preserve-3d;">
+                        <img src="{{ asset('images/herosingkong.png') }}" alt="Produk Olahan Singkong Premium Desa Pengkol"
+                            style="width: 100%; height: 100%; object-fit: cover; display: block; scale: 1.05; transition: transform 0.5s;"
+                            onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1.05)'">
+                    </div>
+
+                    <div
+                        style="position: absolute; top: -10px; right: -10px; width: 40px; height: 40px; background: #22c55e; border-radius: 50%; transform: translateZ(-20px); opacity: 0.6; blur: 4px;">
+                    </div>
+                    <div
+                        style="position: absolute; bottom: -15px; left: 20px; width: 80px; height: 10px; background: #111827; border-radius: 10px; transform: translateZ(40px); opacity: 0.1; filter: blur(5px);">
+                    </div>
                 </div>
             </div>
 
         </div>
     </section>
 
-    <style>
-        @media (max-width: 768px) {
-            .hero-grid {
-                grid-template-columns: 1fr !important;
-                gap: 32px !important;
-                text-align: center;
-            }
-
-            .hero-actions {
-                justify-content: center;
-            }
-
-            .stats-row {
-                justify-content: center;
-                gap: 16px !important;
-            }
-        }
-    </style>
-
-    <section class="section" id="profil">
-        <div class="container split">
-            <div>
-                <span class="eyebrow">Tentang Program</span>
-                <h2>Mengangkat potensi singkong Desa Pengkol lewat etalase digital.</h2>
-            </div>
-            <div class="rich-text">
-                <p>Desa Pengkol memiliki potensi UMKM berbasis singkong yang dapat dikembangkan menjadi produk bernilai
-                    jual. Website ini dirancang sebagai media promosi, katalog produk, dan kanal informasi bagi pelaku usaha
-                    lokal.</p>
-                <p>Admin dapat mengelola produk dan artikel secara mandiri melalui dashboard, termasuk mengunggah foto,
-                    mengatur harga, stok, dan status publikasi.</p>
-            </div>
+    <section class="section fade-in-section" id="profil">
+    <div class="container split">
+        <div class="profile-animate-left">
+            <span class="eyebrow">Tentang Program</span>
+            <h2>Mengangkat potensi singkong Desa Pengkol lewat etalase digital.</h2>
         </div>
-    </section>
+        <div class="rich-text profile-animate-right">
+            <p>Desa Pengkol memiliki potensi UMKM berbasis singkong yang dapat dikembangkan menjadi produk bernilai
+                jual. Website ini dirancang sebagai media promosi, katalog produk, dan kanal informasi bagi pelaku usaha
+                lokal.</p>
+            <p>Admin dapat mengelola produk dan artikel secara mandiri melalui dashboard, termasuk mengunggah foto,
+                mengatur harga, stok, dan status publikasi.</p>
+        </div>
+    </div>
+</section>
 
-    <section class="section muted" style="background-color: #f8fafc; padding: 100px 0; font-family: system-ui, sans-serif;">
+<style>
+    /* --- ANIMASI EXCLUSIVE UNTUK SECTION PROFIL --- */
+    
+    /* State Awal (Saat Belum Di-scroll) */
+    .fade-in-section#profil .profile-animate-left {
+        opacity: 0;
+        transform: translateX(-50px); /* Tertahan di kiri */
+        transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+        will-change: opacity, transform;
+    }
+
+    .fade-in-section#profil .profile-animate-right {
+        opacity: 0;
+        transform: translateX(50px); /* Tertahan di kanan */
+        /* Beri sedikit delay (0.15s) pada sisi kanan agar efek kemunculannya bergantian (staggered) */
+        transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1) 0.15s, transform 1s cubic-bezier(0.25, 1, 0.5, 1) 0.15s;
+        will-change: opacity, transform;
+    }
+
+    /* State Akhir (Saat (.is-visible) Aktif Dipicu oleh Script Bawaanmu) */
+    .fade-in-section#profil.is-visible .profile-animate-left,
+    .fade-in-section#profil.is-visible .profile-animate-right {
+        opacity: 1;
+        transform: translateX(0); /* Bertemu di tengah dengan halus */
+    }
+</style>
+
+    <section class="section muted fade-in-section"
+        style="background-color: #f8fafc; padding: 100px 0; font-family: system-ui, sans-serif;">
         <div class="container section-head"
             style="max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px;">
             <div style="display: flex; flex-direction: column; gap: 8px;">
@@ -126,7 +165,7 @@
         </div>
     </section>
 
-    <section class="section">
+    <section class="section fade-in-section">
         <div class="container section-head">
             <div>
                 <span class="eyebrow">Cerita UMKM</span>
@@ -144,10 +183,8 @@
     </section>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
-    <section class="testimoni-section">
+    <section class="testimoni-section fade-in-section">
         <div class="testimoni-container">
-
             <div class="testimoni-header">
                 <span class="testimoni-eyebrow">Apresiasi & Ulasan</span>
                 <h2 class="testimoni-title">Apa Kata Mereka Tentang Kami?</h2>
@@ -156,7 +193,6 @@
 
             <div class="swiper testimoniSwiper">
                 <div class="swiper-wrapper" style="padding-bottom: 30px;">
-
                     <div class="swiper-slide testimoni-card">
                         <div class="testimoni-content">
                             <div class="quote-icon">“</div>
@@ -175,7 +211,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="swiper-slide testimoni-card">
                         <div class="testimoni-content">
                             <div class="quote-icon">“</div>
@@ -194,7 +229,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="swiper-slide testimoni-card">
                         <div class="testimoni-content">
                             <div class="quote-icon">“</div>
@@ -213,7 +247,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="swiper-slide testimoni-card">
                         <div class="testimoni-content">
                             <div class="quote-icon">“</div>
@@ -232,15 +265,82 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
                 <div class="swiper-button-next-custom">🡪</div>
                 <div class="swiper-button-prev-custom">🡨</div>
-
                 <div class="swiper-pagination"></div>
             </div>
+        </div>
+    </section>
 
+    <section class="faq-section fade-in-section">
+        <div class="faq-container">
+            <div class="faq-header">
+                <span class="faq-eyebrow">Pertanyaan Umum</span>
+                <h2 class="faq-title">Frequently Asked Questions</h2>
+                <div class="faq-divider"></div>
+            </div>
+
+            <div class="faq-accordion-wrapper">
+                <div class="faq-item">
+                    <button class="faq-trigger">
+                        <span class="faq-question">Apa yang membuat keripik singkong Desa Pengkol berbeda dengan keripik
+                            biasa?</span>
+                        <span class="faq-icon-arrow"></span>
+                    </button>
+                    <div class="faq-panel">
+                        <div class="faq-body">
+                            <p>Keripik singkong kami diproduksi dari jenis singkong lokal pilihan hasil bumi Desa Pengkol
+                                yang terkenal memiliki tekstur empuk dan gurih alami. Dipotong dengan ketipisan yang presisi
+                                dan diolah menggunakan resep tradisional, menghasilkan keripik yang ekstra renyah, bumbu
+                                merata, dan tidak meninggalkan minyak berlebih.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-trigger">
+                        <span class="faq-question">Apakah produk camilan singkong ini menggunakan pengawet atau pewarna
+                            kimia?</span>
+                        <span class="faq-icon-arrow"></span>
+                    </button>
+                    <div class="faq-panel">
+                        <div class="faq-body">
+                            <p>Sama sekali tidak. Seluruh produk olahan kami, baik keripik maupun kerupuk, dijamin 100%
+                                menggunakan bahan baku alami, bebas pengawet, dan tanpa pewarna buatan. Kami memanfaatkan
+                                metode pengemasan modern kedap udara (premium packaging) untuk menjaga daya tahan produk
+                                agar tetap fresh hingga sampai ke tangan konsumen.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-trigger">
+                        <span class="faq-question">Varian rasa apa saja yang tersedia di katalog online ini?</span>
+                        <span class="faq-icon-arrow"></span>
+                    </button>
+                    <div class="faq-panel">
+                        <div class="faq-body">
+                            <p>Kami menyediakan berbagai varian rasa premium untuk memenuhi selera pasar. Mulai dari rasa
+                                Original Gurih Tradisional, Balado Pedas Manis, Keju Premium, hingga varian Kerupuk Singkong
+                                bumbu bawang yang renyah. Anda dapat melihat detail komposisi lengkapnya pada halaman
+                                katalog masing-masing produk.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-trigger">
+                        <span class="faq-question">Bagaimana sistem pemesanan dan metode pengirimannya?</span>
+                        <span class="faq-icon-arrow"></span>
+                    </button>
+                    <div class="faq-panel">
+                        <div class="faq-body">
+                            <p>Pemesanan dapat dilakukan langsung dengan mengklik tombol beli pada produk yang Anda pilih di
+                                website ini. Sistem akan langsung menghubungkan Anda ke WhatsApp resmi pengrajin lokal Desa
+                                Pengkol untuk konfirmasi alamat dan total ongkos kirim. Kami siap melayani pengiriman retail
+                                (eceran) maupun pesanan dalam partai besar (grosir) ke seluruh Indonesia.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -248,37 +348,123 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            // --- 1. JAVASCRIPT ANIMASI SCROLL (INTERSECTION OBSERVER) ---
+            const animatedSections = document.querySelectorAll('.fade-in-section');
+
+            const sectionOptions = {
+                root: null, // Menggunakan viewport browser sebagai acuan
+                threshold: 0.12, // Animasi mulai jalan jika 12% bagian section sudah masuk layar
+                rootMargin: "0px 0px -40px 0px" // Triger sedikit ditahan agar terlihat transisi halusnya
+            };
+
+            const sectionObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Tambahkan class pemicu agar CSS menjalankan transisi
+                        entry.target.classList.add('is-visible');
+                        // Berhenti mengamati jika sudah dianimasikan agar performa browser tetap enteng
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, sectionOptions);
+
+            animatedSections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+
+            // --- 2. SWIPER TESTIMONI INITIALIZATION ---
             const swiper = new Swiper('.testimoniSwiper', {
                 slidesPerView: 1,
                 spaceBetween: 32,
                 loop: true,
                 autoplay: {
                     delay: 4000,
-                    disableOnInteraction: false,
+                    disableOnInteraction: false
                 },
                 pagination: {
                     el: '.swiper-pagination',
                     clickable: true,
-                    dynamicBullets: true,
+                    dynamicBullets: true
                 },
                 navigation: {
                     nextEl: '.swiper-button-next-custom',
-                    prevEl: '.swiper-button-prev-custom',
+                    prevEl: '.swiper-button-prev-custom'
                 },
-                // Sistem Breakpoint Responsif Layar
                 breakpoints: {
                     768: {
-                        slidesPerView: 2,
+                        slidesPerView: 2
                     },
                     1024: {
-                        slidesPerView: 3,
+                        slidesPerView: 3
                     }
                 }
+            });
+
+
+            // --- 3. FAQ ACCORDION LOGIC ---
+            const faqTriggers = document.querySelectorAll(".faq-trigger");
+            faqTriggers.forEach(trigger => {
+                trigger.addEventListener("click", function() {
+                    const currentItem = this.parentNode;
+                    const panel = this.nextElementSibling;
+
+                    document.querySelectorAll(".faq-item").forEach(item => {
+                        if (item !== currentItem && item.classList.contains("active")) {
+                            item.classList.remove("active");
+                            item.querySelector(".faq-panel").style.maxHeight = null;
+                        }
+                    });
+
+                    currentItem.classList.toggle("active");
+                    if (currentItem.classList.contains("active")) {
+                        panel.style.maxHeight = panel.scrollHeight + "px";
+                    } else {
+                        panel.style.maxHeight = null;
+                    }
+                });
             });
         });
     </script>
 
     <style>
+        /* --- CORE RULES UNTUK BASE CSS ANIMASI SCROLL --- */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(40px);
+            /* Dorong sejauh 40px ke bawah sebelum di-scroll */
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+                transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: opacity, transform;
+            /* Optimalisasi akselerasi GPU perangkat */
+        }
+
+        /* Saat section menyentuh viewport scroll browser */
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+            /* Kembali ke posisi semula secara halus */
+        }
+
+        /* Hero Grid Media Queries Overrides */
+        @media (max-width: 768px) {
+            .hero-grid {
+                grid-template-columns: 1fr !important;
+                gap: 32px !important;
+                text-align: center;
+            }
+
+            .hero-actions {
+                justify-content: center;
+            }
+
+            .stats-row {
+                justify-content: center;
+                gap: 16px !important;
+            }
+        }
+
+        /* Testimoni Styles */
         .testimoni-section {
             padding: 100px 0;
             background-color: #ffffff;
@@ -291,7 +477,6 @@
             padding: 0 24px;
         }
 
-        /* Header */
         .testimoni-header {
             text-align: center;
             margin-bottom: 50px;
@@ -323,13 +508,11 @@
             margin: 18px auto 0;
         }
 
-        /* Swiper Container Customization */
         .testimoniSwiper {
             position: relative;
             padding: 20px 40px !important;
         }
 
-        /* Kartu Desain */
         .testimoni-card {
             background-color: #f8fafc;
             padding: 36px;
@@ -339,7 +522,6 @@
             flex-direction: column;
             justify-content: space-between;
             height: auto;
-            /* Biar tinggi seragam otomatis mengikuti isi slide terpanjang */
             box-sizing: border-box;
             transition: all 0.3s ease;
         }
@@ -398,7 +580,6 @@
             z-index: 2;
         }
 
-        /* Profil Pengulas */
         .testimoni-profile {
             display: flex;
             align-items: center;
@@ -444,7 +625,6 @@
             font-size: 0.85rem;
         }
 
-        /* TOMBOL NAVIGASI PANAH CUSTOM PREMIUM (Kanan & Kiri) */
         .swiper-button-next-custom,
         .swiper-button-prev-custom {
             position: absolute;
@@ -483,147 +663,17 @@
             box-shadow: 0 10px 15px -3px rgba(22, 163, 74, 0.2);
         }
 
-        /* Warna Dot Pagination Aktif */
         .swiper-pagination-bullet-active {
             background: #16a34a !important;
             width: 18px !important;
             border-radius: 4px !important;
         }
 
-        /* Responsif Layar HP */
-        @media (max-width: 768px) {
-            .testimoni-section {
-                padding: 60px 0;
-            }
-
-            .testimoni-title {
-                font-size: 1.8rem;
-            }
-
-            .testimoniSwiper {
-                padding: 10px 0 !important;
-            }
-
-            /* Sembunyikan panah di HP agar layar bersih, user bisa geser langsung sentuh jempol (swipe) */
-            .swiper-button-next-custom,
-            .swiper-button-prev-custom {
-                display: none;
-            }
-        }
-    </style>
-
-    <section class="faq-section">
-        <div class="faq-container">
-
-            <div class="faq-header">
-                <span class="faq-eyebrow">Pertanyaan Umum</span>
-                <h2 class="faq-title">Frequently Asked Questions</h2>
-                <div class="faq-divider"></div>
-            </div>
-
-            <div class="faq-accordion-wrapper">
-
-                <div class="faq-item">
-                    <button class="faq-trigger">
-                        <span class="faq-question">Apa yang membuat keripik singkong Desa Pengkol berbeda dengan keripik
-                            biasa?</span>
-                        <span class="faq-icon-arrow"></span>
-                    </button>
-                    <div class="faq-panel">
-                        <div class="faq-body">
-                            <p>Keripik singkong kami diproduksi dari jenis singkong lokal pilihan hasil bumi Desa Pengkol
-                                yang terkenal memiliki tekstur empuk dan gurih alami. Dipotong dengan ketipisan yang presisi
-                                dan diolah menggunakan resep tradisional, menghasilkan keripik yang ekstra renyah, bumbu
-                                merata, dan tidak meninggalkan minyak berlebih.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-trigger">
-                        <span class="faq-question">Apakah produk camilan singkong ini menggunakan pengawet atau pewarna
-                            kimia?</span>
-                        <span class="faq-icon-arrow"></span>
-                    </button>
-                    <div class="faq-panel">
-                        <div class="faq-body">
-                            <p>Sama sekali tidak. Seluruh produk olahan kami, baik keripik maupun kerupuk, dijamin 100%
-                                menggunakan bahan baku alami, bebas pengawet, dan tanpa pewarna buatan. Kami memanfaatkan
-                                metode pengemasan modern kedap udara (premium packaging) untuk menjaga daya tahan produk
-                                agar tetap fresh hingga sampai ke tangan konsumen.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-trigger">
-                        <span class="faq-question">Varian rasa apa saja yang tersedia di katalog online ini?</span>
-                        <span class="faq-icon-arrow"></span>
-                    </button>
-                    <div class="faq-panel">
-                        <div class="faq-body">
-                            <p>Kami menyediakan berbagai varian rasa premium untuk memenuhi selera pasar. Mulai dari rasa
-                                Original Gurih Tradisional, Balado Pedas Manis, Keju Premium, hingga varian Kerupuk Singkong
-                                bumbu bawang yang renyah. Anda dapat melihat detail komposisi lengkapnya pada halaman
-                                katalog masing-masing produk.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-trigger">
-                        <span class="faq-question">Bagaimana sistem pemesanan dan metode pengirimannya?</span>
-                        <span class="faq-icon-arrow"></span>
-                    </button>
-                    <div class="faq-panel">
-                        <div class="faq-body">
-                            <p>Pemesanan dapat dilakukan langsung dengan mengklik tombol beli pada produk yang Anda pilih di
-                                website ini. Sistem akan langsung menghubungkan Anda ke WhatsApp resmi pengrajin lokal Desa
-                                Pengkol untuk konfirmasi alamat dan total ongkos kirim. Kami siap melayani pengiriman retail
-                                (eceran) maupun pesanan dalam partai besar (grosir) ke seluruh Indonesia.</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const faqTriggers = document.querySelectorAll(".faq-trigger");
-
-            faqTriggers.forEach(trigger => {
-                trigger.addEventListener("click", function() {
-                    const currentItem = this.parentNode;
-                    const panel = this.nextElementSibling;
-
-                    // Menutup panel lain agar tetap rapi (Single Active Mode)
-                    document.querySelectorAll(".faq-item").forEach(item => {
-                        if (item !== currentItem && item.classList.contains("active")) {
-                            item.classList.remove("active");
-                            item.querySelector(".faq-panel").style.maxHeight = null;
-                        }
-                    });
-
-                    // Toggle kelas active pada item yang diklik
-                    currentItem.classList.toggle("active");
-
-                    if (currentItem.classList.contains("active")) {
-                        panel.style.maxHeight = panel.scrollHeight + "px";
-                    } else {
-                        panel.style.maxHeight = null;
-                    }
-                });
-            });
-        });
-    </script>
-
-    <style>
+        /* FAQ Styles */
         .faq-section {
             padding: 100px 0;
             background-color: #f8fafc;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', system-ui, sans-serif;
         }
 
         .faq-container {
@@ -632,7 +682,6 @@
             padding: 0 24px;
         }
 
-        /* Header */
         .faq-header {
             text-align: center;
             margin-bottom: 55px;
@@ -664,7 +713,6 @@
             margin: 18px auto 0;
         }
 
-        /* Wrapper Accordion */
         .faq-accordion-wrapper {
             display: flex;
             flex-direction: column;
@@ -706,7 +754,6 @@
             padding-right: 20px;
         }
 
-        /* Custom CSS Arrow Indicator */
         .faq-icon-arrow {
             position: relative;
             width: 12px;
@@ -738,7 +785,6 @@
             transform: rotate(-45deg);
         }
 
-        /* Panel Konten Animasi */
         .faq-panel {
             max-height: 0;
             overflow: hidden;
@@ -757,7 +803,6 @@
             text-align: justify;
         }
 
-        /* Keadaan Aktif (FAQ Terbuka) */
         .faq-item.active {
             border-color: #16a34a;
             box-shadow: 0 10px 20px -5px rgba(22, 163, 74, 0.05);
@@ -780,14 +825,26 @@
             background-color: #16a34a;
         }
 
-        /* Responsif Mobile Screen */
+        /* Tablet & Mobile Responsiveness overrides for Testimoni & FAQ */
         @media (max-width: 768px) {
+
+            .testimoni-section,
             .faq-section {
-                padding: 70px 0;
+                padding: 60px 0;
             }
 
+            .testimoni-title,
             .faq-title {
                 font-size: 1.8rem;
+            }
+
+            .testimoniSwiper {
+                padding: 10px 0 !important;
+            }
+
+            .swiper-button-next-custom,
+            .swiper-button-prev-custom {
+                display: none;
             }
 
             .faq-trigger {
