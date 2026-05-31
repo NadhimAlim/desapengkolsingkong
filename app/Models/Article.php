@@ -18,6 +18,10 @@ class Article extends Model
         'image_path',
         'is_published',
         'published_at',
+
+        'meta_title',
+        'meta_description',
+        'meta_keywords',
     ];
 
     protected function casts(): array

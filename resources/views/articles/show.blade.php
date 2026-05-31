@@ -1,6 +1,32 @@
 @extends('layouts.app')
 
-@section('title', $article->title)
+@section('title', $article->meta_title ?: $article->title)
+
+@section('seo_meta')
+    <meta name="description" content="{{ $article->meta_description ?: Str::limit(strip_tags($article->excerpt ?: $article->content), 155) }}">
+    @if($article->meta_keywords)
+        <meta name="keywords" content="{{ $article->meta_keywords }}">
+    @endif
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ request()->url() }}">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="{{ $article->meta_title ?: $article->title }}">
+    <meta property="og:description" content="{{ $article->meta_description ?: Str::limit(strip_tags($article->excerpt ?: $article->content), 155) }}">
+    <meta property="og:url" content="{{ request()->url() }}">
+    <meta property="og:site_name" content="Website Resmi Desa Pengkol">
+    @if($article->image_path)
+        <meta property="og:image" content="{{ asset('storage/'.$article->image_path) }}">
+        <meta property="og:image:alt" content="{{ $article->title }}">
+    @endif
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $article->meta_title ?: $article->title }}">
+    <meta name="twitter:description" content="{{ $article->meta_description ?: Str::limit(strip_tags($article->excerpt ?: $article->content), 155) }}">
+    @if($article->image_path)
+        <meta name="twitter:image" content="{{ asset('storage/'.$article->image_path) }}">
+    @endif
+@endsection
 
 @section('content')
     <article class="article-detail" style="background-color: #ffffff; padding: 60px 0 100px 0; font-family: system-ui, -apple-system, sans-serif;">
