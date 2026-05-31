@@ -53,7 +53,7 @@
         <span>&copy; {{ date('Y') }} UMKM Singkong Desa Pengkol. Seluruh Hak Cipta Dilindungi.</span>
         <span style="display: flex; align-items: center; gap: 5px;">
             <svg style="width: 16px; height: 16px; color: #f87171;" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/></svg>
-            Dikembangkan untuk Program PPKO Desa Pengkol
+            Dikembangkan untuk Program PPK Ormawa BEM FKIP UAD 2026
         </span>
     </div>
 </footer>
