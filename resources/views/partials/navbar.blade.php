@@ -2,13 +2,12 @@
     <div class="container nav-inner" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; position: relative;">
         
         <a href="{{ route('home') }}" class="brand" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #1a2f1b;">
-            <span class="brand-mark" style="background-color: #1a2f1b; color: #ffffff; padding: 8px 12px; border-radius: 8px; font-weight: bold; font-size: 1.1rem;">SP</span>
+            <img src="{{ asset('images/logodesa.png') }}" alt="Logo Desa Pengkol" style="height: 42px; width: auto; object-fit: contain; display: block;">
             <span style="display: flex; flex-direction: column;">
                 <strong style="font-size: 1.2rem; color: #111827; letter-spacing: -0.3px; line-height: 1.2;">Singkong Pengkol</strong>
                 <small style="color: #047857; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px;">UMKM Desa</small>
             </span>
         </a>
-
         <div class="nav-links" id="nav-menu">
             <a href="{{ route('home') }}#profil" style="color: #4b5563; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s;" onmouseover="this.style.color='#047857'" onmouseout="this.style.color='#4b5563'">Profil</a>
             <a href="{{ route('products.index') }}" style="color: #4b5563; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s;" onmouseover="this.style.color='#047857'" onmouseout="this.style.color='#4b5563'">Produk</a>
@@ -39,7 +38,6 @@
 <div id="google_translate_element" style="display:none;"></div>
 
 <style>
-    /* Menghilangkan pop-up banner bawaan Google Translate agar web tetap bersih & professional */
     .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon, .goog-te-gadget span { display: none !important; }
     body { top: 0px !important; }
     .goog-te-balloon-frame { display: none !important; }
@@ -64,7 +62,6 @@
         transition: 0.3s;
     }
 
-    /* Tampilan Desktop */
     @media (min-width: 769px) {
         #nav-menu {
             display: flex !important;
@@ -73,7 +70,6 @@
         }
     }
 
-    /* Tampilan HP & Tablet */
     @media (max-width: 768px) {
         #tombol-garis-tiga {
             display: flex !important;
@@ -124,7 +120,6 @@
 </style>
 
 <script>
-    // 1. Inisialisasi awal Google Translate Engine
     function googleTranslateElementInit() {
         new google.translate.TranslateElement({
             pageLanguage: 'id', 
@@ -134,50 +129,39 @@
         }, 'google_translate_element');
     }
 
-    // 2. Fungsi saat user mengubah pilihan dropdown bahasa
     function changeLanguage(langCode) {
-        // Simpan pilihan bahasa di memori browser lokal agar konisten saat pindah halaman
         localStorage.setItem('pilihan_bahasa_umkm', langCode);
 
-        // Pasang cookie format resmi Google Translate
         document.cookie = "googtrans=/id/" + langCode + "; path=/;";
         document.cookie = "googtrans=/id/" + langCode + "; domain=" + window.location.hostname + "; path=/;";
 
-        // Eksekusi perubahan ke komponen inti Google
         const googleSelect = document.querySelector('.goog-te-combo');
         if (googleSelect) {
             googleSelect.value = langCode;
             googleSelect.dispatchEvent(new Event('change'));
         } else {
-            // Pengaman: Jika engine google belum siap saat diklik, refresh halaman untuk memicu cookie baru
             window.location.reload();
         }
     }
 
-    // 3. Sistem Otomatis saat halaman baru selesai dimuat (Mengingat Bahasa)
     document.addEventListener('DOMContentLoaded', function () {
-        // Ambil data memori bahasa yang pernah diklik sebelumnya
         const bahasaTerakhir = localStorage.getItem('pilihan_bahasa_umkm');
 
-        // Jika memori menemukan bahasa Inggris, pasang paksa cookie sebelum engine google termuat
         if (bahasaTerakhir === 'en') {
             document.cookie = "googtrans=/id/en; path=/;";
             const switcher = document.getElementById('language-switcher');
             if (switcher) switcher.value = 'en';
         }
 
-        // Load core library Google Translate secara aman (Asynchronous)
         const script = document.createElement('script');
         script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
         document.body.appendChild(script);
 
-        // Pengaman sinkronisasi visual tombol dropdown agar posisinya pas
         setTimeout(() => {
             const switcher = document.getElementById('language-switcher');
             if (switcher && bahasaTerakhir) {
                 switcher.value = bahasaTerakhir;
                 
-                // Trigger perubahan jika Google Engine mendeteksi ketidaksesuaian data
                 const googleSelect = document.querySelector('.goog-te-combo');
                 if (googleSelect && googleSelect.value !== bahasaTerakhir) {
                     googleSelect.value = bahasaTerakhir;
@@ -186,7 +170,6 @@
             }
         }, 1000);
 
-        // 4. Logik Operasional Tombol Hamburger Menu Layar HP
         const tombol = document.getElementById('tombol-garis-tiga');
         const menuUtama = document.getElementById('nav-menu');
 
